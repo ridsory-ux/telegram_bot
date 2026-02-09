@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Balance</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+  margin:0;
+  height:100vh;
+  background: radial-gradient(1200px 600px at top, #1b2a4e, #070b18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Inter',sans-serif;
+  color:white;
+}
+
+.phone {
+  width:390px;
+  height:780px;
+  background:linear-gradient(180deg,#0f172a,#070b18);
+  border-radius:36px;
+  padding:28px;
+  position:relative;
+  box-shadow:0 0 40px rgba(80,140,255,.25);
+}
+
+.top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.back {
+  opacity:.6;
+  font-size:14px;
+}
+
+.avatar {
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#3ff1e1,#4f8cff);
+}
+
+.header {
+  text-align:center;
+  margin-top:20px;
+  font-weight:600;
+}
+
+.balance {
+  margin-top:24px;
+  text-align:center;
+}
+
+.balance p {
+  opacity:.6;
+  margin:0;
+}
+
+.balance h1 {
+  margin:8px 0 0;
+  font-size:36px;
+  color:#3ff1e1;
+}
+
+.actions {
+  display:flex;
+  justify-content:space-between;
+  margin-top:28px;
+}
+
+.action {
+  width:72px;
+  height:72px;
+  background:rgba(255,255,255,.06);
+  border-radius:18px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  opacity:.9;
+}
+
+.tx {
+  margin-top:28px;
+}
+
+.tx-title {
+  opacity:.5;
+  font-size:13px;
+  margin-bottom:10px;
+}
+
+.tx-item {
+  display:flex;
+  justify-content:space-between;
+  padding:14px 16px;
+  margin-bottom:12px;
+  border-radius:14px;
+  background:rgba(255,255,255,.06);
+}
+
+.tx-item.failed {
+  background:rgba(255,80,80,.18);
+}
+
+.footer-nav {
+  position:absolute;
+  bottom:20px;
+  left:0;
+  right:0;
+  display:flex;
+  justify-content:space-around;
+  font-size:12px;
+  opacity:.45;
+}
+</style>
+</head>
+
+<body>
+<div class="phone">
+
+  <div class="top">
+    <div class="back">‹ Back</div>
+    <div class="avatar"></div>
+  </div>
+
+  <div class="header">{{ name }}</div>
+
+  <div class="balance">
+    <p>Total Balance</p>
+    <h1>${{ balance }}</h1>
+  </div>
+
+  <div class="actions">
+    <div class="action">＋<br>Deposit</div>
+    <div class="action">⇄<br>Trade</div>
+    <div class="action">−<br>Withdraw</div>
+    <div class="action">👤<br>Profile</div>
+  </div>
+
+  <div class="tx">
+    <div class="tx-title">Recent Activity</div>
+
+    <div class="tx-item failed">
+      <div>Card verification</div>
+      <div>Failed ${{ failed_amount }}</div>
+    </div>
+
+    <div class="tx-item"><div>Transfer</div><div>$1200</div></div>
+    <div class="tx-item"><div>Transfer</div><div>$800</div></div>
+    <div class="tx-item"><div>Transfer</div><div>$1500</div></div>
+    <div class="tx-item"><div>Transfer</div><div>$600</div></div>
+    <div class="tx-item"><div>Transfer</div><div>$900</div></div>
+    <div class="tx-item"><div>Transfer</div><div>$700</div></div>
+  </div>
+
+  <div class="footer-nav">
+    <div>Wallet</div>
+    <div>Trading</div>
+    <div>Alerts</div>
+    <div>Settings</div>
+  </div>
+
+</div>
+</body>
+</html>

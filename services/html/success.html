@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Withdrawal</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+  margin:0;
+  height:100vh;
+  background: radial-gradient(1200px 600px at top, #1b2a4e, #070b18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Inter',sans-serif;
+  color:white;
+}
+
+.phone {
+  width:390px;
+  height:780px;
+  background:linear-gradient(180deg,#0f172a,#070b18);
+  border-radius:36px;
+  padding:28px;
+  position:relative;
+  box-shadow:0 0 40px rgba(80,140,255,.25);
+}
+
+.header {
+  text-align:center;
+  font-size:22px;
+  font-weight:700;
+  margin-top:20px;
+}
+
+.check {
+  margin:50px auto;
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#3ff1e1,#4f8cff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:42px;
+  box-shadow:0 0 30px rgba(79,140,255,.9);
+}
+
+.amount {
+  text-align:center;
+  font-size:36px;
+  color:#3ff1e1;
+  margin-bottom:30px;
+}
+
+.card {
+  background:rgba(255,255,255,.06);
+  border-radius:20px;
+  padding:20px;
+}
+
+.row {
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:14px;
+  font-size:14px;
+}
+
+.row span:last-child {
+  font-weight:600;
+}
+
+.button {
+  margin-top:30px;
+  background:linear-gradient(135deg,#3ff1e1,#4f8cff);
+  text-align:center;
+  padding:14px;
+  border-radius:14px;
+  font-weight:600;
+}
+
+.footer {
+  position:absolute;
+  bottom:20px;
+  left:0;
+  right:0;
+  text-align:center;
+  font-size:12px;
+  opacity:.4;
+}
+</style>
+</head>
+
+<body>
+<div class="phone">
+
+  <div class="header">Withdrawal</div>
+
+  <div class="check">✓</div>
+
+  <div class="amount">${{ withdraw }}</div>
+
+  <div class="card">
+    <div class="row"><span>User</span><span>{{ username }}</span></div>
+    <div class="row"><span>Balance</span><span>${{ balance }}</span></div>
+    <div class="row"><span>Card</span><span>{{ card }}</span></div>
+    <div class="row"><span>Recipient</span><span>{{ fullname }}</span></div>
+  </div>
+
+  <div class="button">Transaction completed</div>
+
+  <div class="footer">Funds have been successfully withdrawn</div>
+
+</div>
+</body>
+</html>

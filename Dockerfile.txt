@@ -1,0 +1,30 @@
+FROM python:3.11-slim
+
+# Системные зависимости для Chromium
+RUN apt-get update && apt-get install -y \
+    chromium \
+    chromium-driver \
+    fonts-liberation \
+    libnss3 \
+    libatk-bridge2.0-0 \
+    libgtk-3-0 \
+    libxss1 \
+    libasound2 \
+    libgbm1 \
+    libxshmfence1 \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
+# Переменные для Playwright
+ENV PLAYWRIGHT_BROWSERS_PATH=0
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+RUN playwright install chromium
+
+COPY . .
+
+CMD ["python", "bot.py"]

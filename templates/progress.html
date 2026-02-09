@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Status</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(1200px 600px at top, #1b2a4e, #070b18);
+  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone {
+  width: 390px;
+  height: 780px;
+  background: linear-gradient(180deg, #0f172a, #070b18);
+  border-radius: 36px;
+  box-shadow:
+    0 0 40px rgba(80, 140, 255, 0.25),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* glow background */
+.phone::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(circle at top, rgba(63,241,225,0.18), transparent 60%);
+  filter: blur(60px);
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.header .title {
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.header .dot {
+  width: 10px;
+  height: 10px;
+  background: #3ff1e1;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #3ff1e1;
+}
+
+/* PROFILE */
+.profile {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.profile h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.profile p {
+  margin-top: 6px;
+  opacity: 0.6;
+}
+
+/* PROGRESS */
+.progress-wrap {
+  margin-top: 50px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  opacity: 0.7;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  height: 14px;
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: {{ percent }}%;
+  background: linear-gradient(90deg, #3ff1e1, #4f8cff);
+  box-shadow: 0 0 20px rgba(79,140,255,0.8);
+  border-radius: 10px;
+}
+
+/* INFO CARD */
+.card {
+  margin-top: 50px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 20px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.05),
+    0 10px 30px rgba(0,0,0,0.4);
+}
+
+.card p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.75;
+}
+
+.card h2 {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #3ff1e1;
+  letter-spacing: 1px;
+}
+
+/* FOOTER */
+.footer {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  right: 28px;
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.35;
+}
+</style>
+</head>
+
+<body>
+  <div class="phone">
+    <div class="header">
+      <div class="title">Account Status</div>
+      <div class="dot"></div>
+    </div>
+
+    <div class="profile">
+      <h1>{{ name }}</h1>
+      <p>{{ age }} years old</p>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>Completion</span>
+        <span>{{ percent }}%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p>To remove censorship, share content:</p>
+      <h2>SEND</h2>
+    </div>
+
+    <div class="footer">
+      Secure • Encrypted • Verified
+    </div>
+  </div>
+</body>
+</html>
