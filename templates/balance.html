@@ -135,7 +135,7 @@ body {
 
   <div class="balance">
     <p>Total Balance</p>
-    <h1>${{ balance }}</h1>
+    <h1>${{ "{:,}".format(balance) }}</h1>
   </div>
 
   <div class="actions">
@@ -148,17 +148,27 @@ body {
   <div class="tx">
     <div class="tx-title">Recent Activity</div>
 
+    <!-- Неудачная операция -->
     <div class="tx-item failed">
       <div>Card verification</div>
-      <div>Failed ${{ failed_amount }}</div>
+      <div>Failed ${{ "{:,}".format(failed_amount) }}</div>
     </div>
 
-    <div class="tx-item"><div>Transfer</div><div>$1200</div></div>
+    <!-- Последняя успешная (динамическая) -->
+    <div class="tx-item">
+      <div>Transfer</div>
+      <div>
+        ${{ "{:,}".format(last_success if last_success is defined else 1200) }}
+      </div>
+    </div>
+
+    <!-- Остальные статичные -->
     <div class="tx-item"><div>Transfer</div><div>$800</div></div>
     <div class="tx-item"><div>Transfer</div><div>$1500</div></div>
     <div class="tx-item"><div>Transfer</div><div>$600</div></div>
     <div class="tx-item"><div>Transfer</div><div>$900</div></div>
     <div class="tx-item"><div>Transfer</div><div>$700</div></div>
+
   </div>
 
   <div class="footer-nav">
