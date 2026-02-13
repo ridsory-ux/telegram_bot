@@ -123,14 +123,15 @@ async def handle_input(message: Message):
             )
 
         elif state == "balance":
-            if len(parts) != 3:
-                raise ValueError
+    if len(parts) != 4:
+        raise ValueError
 
-            path = await make_balance_screenshot(
-                parts[0],
-                int(parts[1]),
-                int(parts[2])
-            )
+    path = await make_balance_screenshot(
+        parts[0],           # name
+        int(parts[1]),      # balance
+        int(parts[2]),      # failed_amount
+        int(parts[3])       # last_success
+    )
 
         elif state == "success":
             if len(parts) != 5:
@@ -188,4 +189,5 @@ if __name__ == "__main__":
         task.cancel()
 
     asyncio.run(runner())
+
 
