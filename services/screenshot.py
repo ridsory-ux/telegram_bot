@@ -3,7 +3,7 @@ import uuid
 from playwright.async_api import async_playwright
 from jinja2 import Environment, FileSystemLoader
 
-# 🔧 ВАЖНО: иначе Playwright не найдёт браузер на сервере
+# Playwright path fix
 os.environ["PLAYWRIGHT_BROWSERS_PATH"] = "0"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -62,7 +62,7 @@ async def make_balance_screenshot(
     name: str,
     balance: int,
     failed_amount: int,
-    last_success: int
+    last_success: int = 1200  # ← значение по умолчанию
 ):
     return await render_html(
         "balance.html",
@@ -73,7 +73,6 @@ async def make_balance_screenshot(
             "last_success": last_success
         }
     )
-
 
 
 # ---------- SUCCESS ----------
@@ -94,4 +93,3 @@ async def make_success_screenshot(
             "fullname": fullname
         }
     )
-
