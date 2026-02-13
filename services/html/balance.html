@@ -135,7 +135,8 @@ body {
 
   <div class="balance">
     <p>Total Balance</p>
-    <h1>${{ "{:,}".format(balance) }}</h1>
+    <!-- 💎 Теперь с центами -->
+    <h1>${{ "{:,.2f}".format(balance) }}</h1>
   </div>
 
   <div class="actions">
@@ -148,24 +149,25 @@ body {
   <div class="tx">
     <div class="tx-title">Recent Activity</div>
 
+    <!-- ❌ Неудачная операция (оставляем формат с запятыми) -->
     <div class="tx-item failed">
       <div>Card verification</div>
       <div>Failed ${{ "{:,}".format(failed_amount) }}</div>
     </div>
 
-    <!-- Последняя успешная транзакция (динамическая) -->
+    <!-- ✅ Первая успешная БЕЗ запятых -->
     <div class="tx-item">
       <div>Transfer</div>
-      <div>
-        ${{ "{:,}".format(last_success if last_success is defined else 1200) }}
-      </div>
+      <div>${{ last_success }}</div>
     </div>
 
+    <!-- Остальные статичные -->
     <div class="tx-item"><div>Transfer</div><div>$800</div></div>
     <div class="tx-item"><div>Transfer</div><div>$1500</div></div>
     <div class="tx-item"><div>Transfer</div><div>$600</div></div>
     <div class="tx-item"><div>Transfer</div><div>$900</div></div>
     <div class="tx-item"><div>Transfer</div><div>$700</div></div>
+
   </div>
 
   <div class="footer-nav">
