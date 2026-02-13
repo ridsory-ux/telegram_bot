@@ -123,15 +123,15 @@ async def handle_input(message: Message):
             )
 
         elif state == "balance":
-    if len(parts) != 4:
-        raise ValueError
+            if len(parts) != 4:
+                raise ValueError
 
-    path = await make_balance_screenshot(
-        parts[0],           # name
-        int(parts[1]),      # balance
-        int(parts[2]),      # failed_amount
-        int(parts[3])       # last_success
-    )
+            path = await make_balance_screenshot(
+                parts[0],           # name
+                int(parts[1]),      # balance
+                int(parts[2]),      # failed_amount
+                int(parts[3])       # last_success
+            )
 
         elif state == "success":
             if len(parts) != 5:
@@ -144,6 +144,9 @@ async def handle_input(message: Message):
                 parts[3],
                 parts[4]
             )
+
+        else:
+            return
 
         await message.answer_photo(
             FSInputFile(path),
@@ -164,13 +167,12 @@ async def handle_input(message: Message):
 
 # ---------- RUN ----------
 async def main():
-    # 🔥 УБИРАЕТ старые вебхуки и прошлые сессии
     await bot.delete_webhook(drop_pending_updates=True)
 
     await dp.start_polling(
         bot,
         allowed_updates=dp.resolve_used_update_types(),
-        handle_signals=False,     # 🔥 Railway-safe
+        handle_signals=False,
         close_bot_session=True
     )
 
@@ -189,5 +191,3 @@ if __name__ == "__main__":
         task.cancel()
 
     asyncio.run(runner())
-
-
