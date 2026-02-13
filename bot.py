@@ -25,6 +25,10 @@ dp = Dispatcher()
 
 USER_STATE = {}
 
+# 🔐 ПАРОЛЬ
+ACCESS_PASSWORD = "1234567890"
+AUTHORIZED_USERS = set()
+
 stop_event = asyncio.Event()
 
 
@@ -49,16 +53,23 @@ back_kb = ReplyKeyboardMarkup(
 # ---------- START ----------
 @dp.message(F.text == "/start")
 async def start(message: Message):
-    USER_STATE.pop(message.from_user.id, None)
-    await message.answer(
-        "🟢 Бот готов\n\nФОРМАТ ВСЕГДА ЧЕРЕЗ ЗАПЯТУЮ",
-        reply_markup=main_kb
-    )
+    user_id = message.from_user.id
+
+    if user_id in AUTHORIZED_USERS:
+        await message.answer("🟢 Доступ уже открыт", reply_markup=main_kb)
+        return
+
+    USER_STATE[user_id] = "auth"
+    await message.answer("🔐 Введите пароль для доступа:")
 
 
 # ---------- КНОПКИ ----------
 @dp.message(F.text == "📊 Создать скриншот")
 async def progress_btn(message: Message):
+    if message.from_user.id not in AUTHORIZED_USERS:
+        await message.answer("⛔ Доступ запрещён. Введите пароль через /start")
+        return
+
     USER_STATE[message.from_user.id] = "progress"
     await message.answer(
         "Введи одной строкой:\n"
@@ -71,6 +82,10 @@ async def progress_btn(message: Message):
 
 @dp.message(F.text == "💰 Баланс")
 async def balance_btn(message: Message):
+    if message.from_user.id not in AUTHORIZED_USERS:
+        await message.answer("⛔ Доступ запрещён. Введите пароль через /start")
+        return
+
     USER_STATE[message.from_user.id] = "balance"
     await message.answer(
         "Введи одной строкой:\n"
@@ -83,6 +98,10 @@ async def balance_btn(message: Message):
 
 @dp.message(F.text == "✅ Успешный вывод")
 async def success_btn(message: Message):
+    if message.from_user.id not in AUTHORIZED_USERS:
+        await message.answer("⛔ Доступ запрещён. Введите пароль через /start")
+        return
+
     USER_STATE[message.from_user.id] = "success"
     await message.answer(
         "Введи одной строкой:\n"
@@ -95,6 +114,9 @@ async def success_btn(message: Message):
 
 @dp.message(F.text == "⬅️ Назад")
 async def back(message: Message):
+    if message.from_user.id not in AUTHORIZED_USERS:
+        return
+
     USER_STATE.pop(message.from_user.id, None)
     await message.answer("Меню", reply_markup=main_kb)
 
@@ -104,6 +126,20 @@ async def back(message: Message):
 async def handle_input(message: Message):
     user_id = message.from_user.id
     state = USER_STATE.get(user_id)
+
+    # 🔐 Авторизация
+    if state == "auth":
+        if message.text == ACCESS_PASSWORD:
+            AUTHORIZED_USERS.add(user_id)
+            USER_STATE.pop(user_id, None)
+            await message.answer("✅ Доступ разрешён", reply_markup=main_kb)
+        else:
+            await message.answer("❌ Неверный пароль")
+        return
+
+    if user_id not in AUTHORIZED_USERS:
+        await message.answer("⛔ У вас нет доступа. Напишите /start")
+        return
 
     if not state:
         return
@@ -127,10 +163,10 @@ async def handle_input(message: Message):
                 raise ValueError
 
             path = await make_balance_screenshot(
-                parts[0],           # name
-                int(parts[1]),      # balance
-                int(parts[2]),      # failed_amount
-                int(parts[3])       # last_success
+                parts[0],
+                int(parts[1]),
+                int(parts[2]),
+                int(parts[3])
             )
 
         elif state == "success":
