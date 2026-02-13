@@ -74,9 +74,9 @@ async def balance_btn(message: Message):
     USER_STATE[message.from_user.id] = "balance"
     await message.answer(
         "Введи одной строкой:\n"
-        "Имя, Баланс, Неудачная_сумма\n\n"
+        "Имя, Баланс, Неудачная_сумма, Последняя_успешная\n\n"
         "Пример:\n"
-        "Alex, 12500, 15000",
+        "Alex, 12500, 15000, 2300",
         reply_markup=back_kb
     )
 
@@ -188,3 +188,4 @@ if __name__ == "__main__":
         task.cancel()
 
     asyncio.run(runner())
+
