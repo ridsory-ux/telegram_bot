@@ -135,7 +135,7 @@ body {
 
   <div class="balance">
     <p>Total Balance</p>
-    <h1>${{ balance }}</h1>
+    <h1>${{ "{:,}".format(balance) }}</h1>
   </div>
 
   <div class="actions">
@@ -150,13 +150,16 @@ body {
 
     <div class="tx-item failed">
       <div>Card verification</div>
-      <div>Failed ${{ failed_amount }}</div>
+      <div>Failed ${{ "{:,}".format(failed_amount) }}</div>
     </div>
 
+    <!-- Последняя успешная транзакция (динамическая) -->
     <div class="tx-item">
-  <div>Transfer</div>
-  <div>${{ "{:,}".format(last_success) }}</div>
-</div>
+      <div>Transfer</div>
+      <div>
+        ${{ "{:,}".format(last_success if last_success is defined else 1200) }}
+      </div>
+    </div>
 
     <div class="tx-item"><div>Transfer</div><div>$800</div></div>
     <div class="tx-item"><div>Transfer</div><div>$1500</div></div>
@@ -175,4 +178,3 @@ body {
 </div>
 </body>
 </html>
-
