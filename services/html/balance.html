@@ -153,7 +153,11 @@ body {
       <div>Failed ${{ failed_amount }}</div>
     </div>
 
-    <div class="tx-item"><div>Transfer</div><div>$1200</div></div>
+    <div class="tx-item">
+  <div>Transfer</div>
+  <div>${{ "{:,}".format(last_success) }}</div>
+</div>
+
     <div class="tx-item"><div>Transfer</div><div>$800</div></div>
     <div class="tx-item"><div>Transfer</div><div>$1500</div></div>
     <div class="tx-item"><div>Transfer</div><div>$600</div></div>
@@ -171,3 +175,4 @@ body {
 </div>
 </body>
 </html>
+
