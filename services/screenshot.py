@@ -58,15 +58,22 @@ async def make_progress_screenshot(name: str, age: int, percent: int):
 
 
 # ---------- BALANCE ----------
-async def make_balance_screenshot(name: str, balance: int, failed_amount: int):
+async def make_balance_screenshot(
+    name: str,
+    balance: int,
+    failed_amount: int,
+    last_success: int
+):
     return await render_html(
         "balance.html",
         {
             "name": name,
             "balance": balance,
-            "failed_amount": failed_amount
+            "failed_amount": failed_amount,
+            "last_success": last_success
         }
     )
+
 
 
 # ---------- SUCCESS ----------
@@ -87,3 +94,4 @@ async def make_success_screenshot(
             "fullname": fullname
         }
     )
+
