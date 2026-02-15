@@ -15,7 +15,8 @@ from config import BOT_TOKEN
 from services.screenshot import (
     make_progress_screenshot,
     make_balance_screenshot,
-    make_success_screenshot
+    make_success_screenshot,
+    make_tg_screenshot
 )
 
 logging.basicConfig(level=logging.INFO)
@@ -37,7 +38,8 @@ main_kb = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text="📊 Создать скриншот")],
         [KeyboardButton(text="💰 Баланс")],
-        [KeyboardButton(text="✅ Успешный вывод")]
+        [KeyboardButton(text="✅ Успешный вывод")],
+        [KeyboardButton(text="📱 Скрин ТГ")]
     ],
     resize_keyboard=True
 )
@@ -112,6 +114,22 @@ async def success_btn(message: Message):
     )
 
 
+@dp.message(F.text == "📱 Скрин ТГ")
+async def tg_btn(message: Message):
+    if message.from_user.id not in AUTHORIZED_USERS:
+        await message.answer("⛔ Доступ запрещён. Введите пароль через /start")
+        return
+
+    USER_STATE[message.from_user.id] = "tg"
+    await message.answer(
+        "Введи одной строкой:\n"
+        "Имя, Время, Буква_аватара, Дата\n\n"
+        "Пример:\n"
+        "low.key, 14:52, L, 9 February",
+        reply_markup=back_kb
+    )
+
+
 @dp.message(F.text == "⬅️ Назад")
 async def back(message: Message):
     if message.from_user.id not in AUTHORIZED_USERS:
@@ -179,6 +197,17 @@ async def handle_input(message: Message):
                 int(parts[2]),
                 parts[3],
                 parts[4]
+            )
+
+        elif state == "tg":
+            if len(parts) != 4:
+                raise ValueError
+
+            path = await make_tg_screenshot(
+                parts[0],  # name
+                parts[1],  # phone_time
+                parts[2],  # avatar_letter
+                parts[3]   # center_date
             )
 
         else:
