@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=430, initial-scale=1.0">
-<title>Messenger Demo</title>
+<title>Telegram Chat</title>
 
 <style>
 *{
@@ -122,7 +122,6 @@ body{
     width:90%;
     background:rgba(30,34,42,0.88);
     backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
     border-radius:16px;
     padding:16px 18px;
     box-shadow:0 10px 30px rgba(0,0,0,0.6);
@@ -208,22 +207,25 @@ body{
 
 <div class="phone">
 
+    <!-- STATUS BAR -->
     <div class="status-bar">
-        <div>11:45</div>
+        <div>{{ phone_time }}</div>
         <div>📶 LTE 🔋31%</div>
     </div>
 
+    <!-- HEADER -->
     <div class="header">
         <div class="back-btn">‹</div>
 
         <div class="profile-center">
-            <div class="profile-name">low.key</div>
+            <div class="profile-name">{{ name }}</div>
             <div class="profile-status">last seen a long time ago</div>
         </div>
 
-        <div class="avatar">L</div>
+        <div class="avatar">{{ avatar_letter }}</div>
     </div>
 
+    <!-- CHAT AREA -->
     <div class="chat-area">
 
         <div class="restriction-box">
@@ -235,10 +237,11 @@ body{
             </div>
         </div>
 
-        <div class="date-bubble">9 February</div>
+        <div class="date-bubble">{{ center_date }}</div>
 
     </div>
 
+    <!-- BOTTOM BAR -->
     <div class="bottom-bar">
         <div class="icon-btn">📎</div>
         <div class="input">Message</div>
