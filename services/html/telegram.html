@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=430, initial-scale=1.0">
+<title>Messenger Demo</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+
+body{
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.phone{
+    width:430px;
+    height:932px;
+    background:#0c0f14;
+    border-radius:40px;
+    overflow:hidden;
+    position:relative;
+    color:white;
+}
+
+/* Status bar */
+.status-bar{
+    height:50px;
+    padding:0 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:17px;
+    font-weight:500;
+}
+
+/* Header */
+.header{
+    padding:5px 15px 15px 15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:relative;
+}
+
+.back-btn{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+}
+
+.profile-center{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    text-align:center;
+}
+
+.profile-name{
+    font-size:18px;
+    font-weight:600;
+}
+
+.profile-status{
+    font-size:13px;
+    color:#9aa4af;
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#9c27b0,#e91e63);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
+}
+
+/* Chat area */
+.chat-area{
+    position:absolute;
+    top:110px;
+    bottom:90px;
+    width:100%;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(120,50,200,0.15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255,80,150,0.12) 0%, transparent 40%),
+        #0c0f14;
+    overflow:hidden;
+}
+
+.chat-area::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 50px);
+    opacity:0.3;
+}
+
+/* Restriction Notice */
+.restriction-box{
+    position:absolute;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    width:90%;
+    background:rgba(30,34,42,0.88);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-radius:16px;
+    padding:16px 18px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+}
+
+.restriction-icon{
+    font-size:20px;
+    margin-top:3px;
+}
+
+.restriction-text{
+    font-size:13px;
+    line-height:1.6;
+    color:#d1d5db;
+}
+
+/* Date bubble */
+.date-bubble{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    background:rgba(40,45,55,0.9);
+    padding:6px 14px;
+    border-radius:14px;
+    font-size:13px;
+    color:#d1d5db;
+}
+
+/* Bottom bar */
+.bottom-bar{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:90px;
+    background:rgba(20,24,30,0.95);
+    display:flex;
+    align-items:center;
+    padding:0 15px;
+    gap:12px;
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+}
+
+.input{
+    flex:1;
+    height:44px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.08);
+    display:flex;
+    align-items:center;
+    padding:0 15px;
+    color:#9aa4af;
+    font-size:15px;
+}
+
+.mic-btn{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="phone">
+
+    <div class="status-bar">
+        <div>11:45</div>
+        <div>📶 LTE 🔋31%</div>
+    </div>
+
+    <div class="header">
+        <div class="back-btn">‹</div>
+
+        <div class="profile-center">
+            <div class="profile-name">low.key</div>
+            <div class="profile-status">last seen a long time ago</div>
+        </div>
+
+        <div class="avatar">L</div>
+    </div>
+
+    <div class="chat-area">
+
+        <div class="restriction-box">
+            <div class="restriction-icon">⛔</div>
+            <div class="restriction-text">
+                The exchange of contact information is restricted.<br>
+                Due to Telegram's policy, access to this chat is restricted.<br><br>
+                To view messages in this chat, please remove the restriction.
+            </div>
+        </div>
+
+        <div class="date-bubble">9 February</div>
+
+    </div>
+
+    <div class="bottom-bar">
+        <div class="icon-btn">📎</div>
+        <div class="input">Message</div>
+        <div class="mic-btn">🎤</div>
+    </div>
+
+</div>
+
+</body>
+</html>
