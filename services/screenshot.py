@@ -62,7 +62,7 @@ async def make_balance_screenshot(
     name: str,
     balance: int,
     failed_amount: int,
-    last_success: int = 1200  # ← значение по умолчанию
+    last_success: int = 1200
 ):
     return await render_html(
         "balance.html",
@@ -91,5 +91,23 @@ async def make_success_screenshot(
             "withdraw": withdraw,
             "card": card,
             "fullname": fullname
+        }
+    )
+
+
+# ---------- TELEGRAM SCREEN ----------
+async def make_tg_screenshot(
+    name: str,
+    phone_time: str,
+    avatar_letter: str,
+    center_date: str
+):
+    return await render_html(
+        "telegram.html",
+        {
+            "name": name,
+            "phone_time": phone_time,
+            "avatar_letter": avatar_letter,
+            "center_date": center_date
         }
     )
